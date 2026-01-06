@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script2Screen - AI Media Generation Platform</title>
+    <meta name="description" content="Professional AI-powered video, image, and media generation platform">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0e27">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">🎬 Script2Screen</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Create Cinematic Masterpieces with AI</h1>
+        <p>Transform your scripts into stunning videos, generate professional images, create motion graphics, and bring your creative vision to life. From 1-minute clips to 3-hour cinematic productions.</p>
+        <button class="generate-btn" onclick="scrollToTools()">Start Creating Now</button>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Tools Section -->
+        <div class="tools-section" id="tools">
+            <h2 class="section-title">🛠️ AI Creation Tools</h2>
+            
+            <!-- Tool Cards Grid -->
+            <div class="tools-grid">
+                <!-- Video Generation -->
+                <div class="tool-card active" data-tool="video">
+                    <div class="tool-icon">🎥</div>
+                    <h3>AI Video Generator</h3>
+                    <p>Create professional videos from 1 minute to 3 hours. HD & Cinema quality with MP4 & GIF export.</p>
+                </div>
+
+                <!-- Image Generation -->
+                <div class="tool-card" data-tool="image">
+                    <div class="tool-icon">🖼️</div>
+                    <h3>Image Generator</h3>
+                    <p>Generate stunning images from detailed descriptions or transform faces into artwork.</p>
+                </div>
+
+                <!-- Motion & Animation -->
+                <div class="tool-card" data-tool="motion">
+                    <div class="tool-icon">🎬</div>
+                    <h3>Motion & Animation</h3>
+                    <p>Create dynamic animations and motion graphics from static images and prompts.</p>
+                </div>
+
+                <!-- Cartoon to Real Video -->
+                <div class="tool-card" data-tool="cartoon-real">
+                    <div class="tool-icon">🔄</div>
+                    <h3>Cartoon → Real Video</h3>
+                    <p>Transform cartoon animations into photorealistic video footage.</p>
+                </div>
+
+                <!-- Real Video to Cartoon -->
+                <div class="tool-card" data-tool="real-cartoon">
+                    <div class="tool-icon">🎨</div>
+                    <h3>Real Video → Cartoon</h3>
+                    <p>Convert real video footage into stylized cartoon animations.</p>
+                </div>
+
+                <!-- Script Generator -->
+                <div class="tool-card" data-tool="script">
+                    <div class="tool-icon">📝</div>
+                    <h3>AI Script Generator</h3>
+                    <p>Generate professional screenplays and scripts from short story ideas.</p>
+                </div>
+
+                <!-- Audio & Voice -->
+                <div class="tool-card" data-tool="audio">
+                    <div class="tool-icon">🎤</div>
+                    <h3>Audio & Voice</h3>
+                    <p>Generate professional voiceovers and audio with clear, editor-quality sound.</p>
+                </div>
+
+                <!-- Multi-Media Creator -->
+                <div class="tool-card" data-tool="multimedia">
+                    <div class="tool-icon">🎞️</div>
+                    <h3>Multi-Media Creator</h3>
+                    <p>Combine multiple photos and videos to create complex motion pictures and movies.</p>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <label class="input-label">📝 Your Prompt, Script, or Description</label>
+                <textarea class="textarea-input" id="promptInput" placeholder="Enter your detailed prompt, screenplay, script, or description here (up to 30,000 characters)...&#10;&#10;Example: Create a 3-minute cinematic video showing a futuristic city at sunset with flying cars, holographic advertisements, and people walking through neon-lit streets. The camera should pan from left to right, revealing the cityscape gradually. Include ambient city sounds and background music. Style: Cinematic, 4K quality, dramatic lighting."></textarea>
+
+                <!-- File Upload Area -->
+                <div class="file-upload-area" id="fileUploadArea">
+                    <div class="video-placeholder-icon">📁</div>
+                    <p>Drag & drop files here or click to upload</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        Supports: Images (JPG, PNG, WEBP), Videos (MP4, MOV, AVI), Scripts (TXT, PDF)
+                    </p>
+                    <input type="file" id="fileInput" multiple accept="image/*,video/*,.txt,.pdf" style="display: none;">
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-area">
+                    <div class="control-group">
+                        <label>⏱️ Duration</label>
+                        <select class="control-select" id="durationSelect">
+                            <option value="1">1 Minute</option>
+                            <option value="5">5 Minutes</option>
+                            <option value="10">10 Minutes</option>
+                            <option value="30">30 Minutes</option>
+                            <option value="60">1 Hour</option>
+                            <option value="120">2 Hours</option>
+                            <option value="180" selected>3 Hours</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>📐 Quality</label>
+                        <select class="control-select" id="qualitySelect">
+                            <option value="hd">HD (720p)</option>
+                            <option value="fullhd" selected>Full HD (1080p)</option>
+                            <option value="4k">4K Cinema</option>
+                            <option value="8k">8K Ultra</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>🎬 Format</label>
+                        <select class="control-select" id="formatSelect">
+                            <option value="mp4" selected>MP4</option>
+                            <option value="gif">GIF</option>
+                            <option value="webm">WebM</option>
+                            <option value="avi">AVI</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>🎨 Style</label>
+                        <select class="control-select" id="styleSelect">
+                            <option value="cinematic" selected>Cinematic</option>
+                            <option value="anime">Anime</option>
+                            <option value="realistic">Photorealistic</option>
+                            <option value="cartoon">Cartoon</option>
+                            <option value="vintage">Vintage</option>
+                            <option value="futuristic">Futuristic</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Advanced Options -->
+                <div class="controls-area">
+                    <div class="control-group">
+                        <label>🎵 Background Music</label>
+                        <select class="control-select" id="musicSelect">
+                            <option value="none">None</option>
+                            <option value="cinematic">Cinematic</option>
+                            <option value="upbeat">Upbeat</option>
+                            <option value="dramatic">Dramatic</option>
+                            <option value="ambient">Ambient</option>
+                            <option value="custom">Custom Upload</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>🗣️ Voice Style</label>
+                        <select class="control-select" id="voiceSelect">
+                            <option value="none">No Voice</option>
+                            <option value="male-professional">Male Professional</option>
+                            <option value="female-professional">Female Professional</option>
+                            <option value="male-casual">Male Casual</option>
+                            <option value="female-casual">Female Casual</option>
+                            <option value="ai-narrator">AI Narrator</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>📊 Aspect Ratio</label>
+                        <select class="control-select" id="aspectSelect">
+                            <option value="16:9" selected>16:9 (Widescreen)</option>
+                            <option value="9:16">9:16 (Vertical)</option>
+                            <option value="1:1">1:1 (Square)</option>
+                            <option value="4:3">4:3 (Standard)</option>
+                            <option value="21:9">21:9 (Ultrawide)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>⚡ Generation Speed</label>
+                        <select class="control-select" id="speedSelect">
+                            <option value="fast" selected>Fast (Real-time)</option>
+                            <option value="balanced">Balanced</option>
+                            <option value="quality">Quality Priority</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button class="generate-btn" id="generateBtn" onclick="startGeneration()">
+                    🚀 Generate Now
+                </button>
+
+                <!-- Status Messages -->
+                <div class="status-message" id="statusMessage"></div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <h3 class="preview-title">📺 Live Preview</h3>
+            
+            <div class="video-preview" id="videoPreview">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div class="video-placeholder-icon">🎬</div>
+                    <p>Your generated content will appear here</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        Start generation to see real-time preview
+                    </p>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progressPercent">0%</span>
+                    <span id="progressStatus">Ready to start</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="margin-top: 1.5rem;">
+                <button class="generate-btn" id="downloadBtn" onclick="downloadResult()" style="display: none; margin-bottom: 0.5rem;">
+                    ⬇️ Download Result
+                </button>
+                <button class="generate-btn" id="shareBtn" onclick="shareResult()" style="background: linear-gradient(135deg, var(--success-color), #059669); display: none; margin-bottom: 0.5rem;">
+                    📤 Share
+                </button>
+                <button class="generate-btn" id="pauseBtn" onclick="pauseGeneration()" style="background: linear-gradient(135deg, var(--warning-color), #d97706); display: none;">
+                    ⏸️ Pause
+                </button>
+            </div>
+
+            <!-- Generation Info -->
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(10, 14, 39, 0.6); border-radius: 10px;">
+                <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">📊 Generation Details</h4>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;">
+                    <p><strong>Tool:</strong> <span id="currentTool">AI Video Generator</span></p>
+                    <p><strong>Duration:</strong> <span id="currentDuration">3 Hours</span></p>
+                    <p><strong>Quality:</strong> <span id="currentQuality">Full HD (1080p)</span></p>
+                    <p><strong>Format:</strong> <span id="currentFormat">MP4</span></p>
+                    <p><strong>Status:</strong> <span id="currentStatus">Ready</span></p>
+                </div>
+            </div>
+
+            <!-- Network Status -->
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success-color); border-radius: 10px;">
+                <p style="font-size: 0.9rem; color: var(--success-color); display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="display: inline-block; width: 8px; height: 8px; background: var(--success-color); border-radius: 50%; animation: pulse 2s infinite;"></span>
+                    Network Connected - Ready for Generation
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2 class="features-title">⭐ Powerful Features</h2>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <h3>Script to Screen</h3>
+                <p>Transform your screenplays into full cinematic productions with AI-powered scene generation and automatic editing.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🤖</div>
+                <h3>SceneForge Technology</h3>
+                <p>Advanced AI that constructs complete scenes from text descriptions, including lighting, camera angles, and transitions.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <h3>StoryRender Engine</h3>
+                <p>Real-time rendering engine that produces cinema-quality output at unprecedented speeds.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Ready</h3>
+                <p>Works seamlessly on all devices. Download as Android app for offline capability and on-the-go creation.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Generate content in real-time with our optimized AI pipeline and cloud infrastructure.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🔄</div>
+                <h3>Pause & Resume</h3>
+                <p>Network interruption? No problem. Your generation pauses automatically and resumes when connection is restored.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🎬</div>
+                <h3>Professional Output</h3>
+                <p>Export in industry-standard formats with cinema-grade quality suitable for professional productions.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🎵</div>
+                <h3>Audio Integration</h3>
+                <p>Generate professional voiceovers, add background music, and ensure crystal-clear audio quality.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Your creative work is encrypted and stored securely. Full control over your content and privacy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2024 Script2Screen - AI Media Generation Platform. Created by Olawale Abdul-ganiyu</p>
+        <p class="footer-text" style="margin-top: 0.5rem;">Professional Film Industry Style • SceneForge • StoryRender • Screenify</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // State Management
+        let currentTool = 'video';
+        let isGenerating = false;
+        let isPaused = false;
+        let progress = 0;
+        let generationInterval = null;
+
+        // Tool Selection
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.tool-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                currentTool = this.dataset.tool;
+                updateToolInfo();
+            });
+        });
+
+        // Update Tool Information
+        function updateToolInfo() {
+            const toolNames = {
+                'video': 'AI Video Generator',
+                'image': 'Image Generator',
+                'motion': 'Motion & Animation',
+                'cartoon-real': 'Cartoon → Real Video',
+                'real-cartoon': 'Real Video → Cartoon',
+                'script': 'AI Script Generator',
+                'audio': 'Audio & Voice',
+                'multimedia': 'Multi-Media Creator'
+            };
+            document.getElementById('currentTool').textContent = toolNames[currentTool] || 'AI Video Generator';
+        }
+
+        // File Upload Handling
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+        
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--accent-color)';
+            fileUploadArea.style.background = 'rgba(0, 212, 255, 0.1)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = 'var(--border-color)';
+            fileUploadArea.style.background = 'transparent';
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--border-color)';
+            fileUploadArea.style.background = 'transparent';
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            const fileCount = files.length;
+            if (fileCount > 0) {
+                showStatus(`✅ ${fileCount} file(s) uploaded successfully`, 'success');
+            }
+        }
+
+        // Update Generation Details
+        function updateGenerationDetails() {
+            const duration = document.getElementById('durationSelect');
+            const quality = document.getElementById('qualitySelect');
+            const format = document.getElementById('formatSelect');
+
+            document.getElementById('currentDuration').textContent = duration.options[duration.selectedIndex].text;
+            document.getElementById('currentQuality').textContent = quality.options[quality.selectedIndex].text;
+            document.getElementById('currentFormat').textContent = format.options[format.selectedIndex].text.toUpperCase();
+        }
+
+        // Update controls when changed
+        document.querySelectorAll('.control-select').forEach(select => {
+            select.addEventListener('change', updateGenerationDetails);
+        });
+
+        // Show Status Message
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = 'status-message ' + type;
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Start Generation
+        function startGeneration() {
+            const prompt = document.getElementById('promptInput').value.trim();
+            
+            if (!prompt && document.getElementById('fileInput').files.length === 0) {
+                showStatus('❌ Please enter a prompt or upload files to generate content', 'error');
+                return;
+            }
+
+            if (isGenerating) {
+                showStatus('⏳ Generation already in progress...', 'info');
+                return;
+            }
+
+            isGenerating = true;
+            isPaused = false;
+            progress = 0;
+
+            // Update UI
+            document.getElementById('generateBtn').disabled = true;
+            document.getElementById('generateBtn').textContent = '⏳ Generating...';
+            document.getElementById('pauseBtn').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'none';
+            document.getElementById('shareBtn').style.display = 'none';
+            
+            document.getElementById('currentStatus').textContent = 'Initializing...';
+            
+            // Show video placeholder with spinner
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+            videoPlaceholder.innerHTML = `
+                <div class="spinner"></div>
+                <p style="margin-top: 1rem;">Initializing AI generation...</p>
+            `;
+
+            showStatus('🚀 Starting generation process...', 'success');
+
+            // Simulate generation progress
+            simulateGeneration();
+        }
+
+        // Simulate Generation Process
+        function simulateGeneration() {
+            const stages = [
+                'Analyzing prompt...',
+                'Generating scenes...',
+                'Creating animations...',
+                'Applying style...',
+                'Rendering frames...',
+                'Processing audio...',
+                'Compositing final output...',
+                'Finalizing...'
+            ];
+
+            let stageIndex = 0;
+            progress = 0;
+
+            generationInterval = setInterval(() => {
+                if (isPaused) return;
+
+                progress += Math.random() * 2;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    completeGeneration();
+                    return;
+                }
+
+                // Update progress
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+
+                // Update stage
+                const newStageIndex = Math.floor(progress / (100 / stages.length));
+                if (newStageIndex !== stageIndex && newStageIndex < stages.length) {
+                    stageIndex = newStageIndex;
+                    document.getElementById('progressStatus').textContent = stages[stageIndex];
+                    document.getElementById('currentStatus').textContent = stages[stageIndex];
+                    
+                    // Update video preview text
+                    const videoPlaceholder = document.getElementById('videoPlaceholder');
+                    if (progress < 100) {
+                        videoPlaceholder.innerHTML = `
+                            <div class="spinner"></div>
+                            <p style="margin-top: 1rem;">${stages[stageIndex]}</p>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                                ${Math.round(progress)}% complete
+                            </p>
+                        `;
+                    }
+                }
+            }, 100);
+        }
+
+        // Complete Generation
+        function completeGeneration() {
+            clearInterval(generationInterval);
+            isGenerating = false;
+            isPaused = false;
+
+            // Update UI
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generateBtn').textContent = '🚀 Generate Again';
+            document.getElementById('pauseBtn').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'block';
+            document.getElementById('shareBtn').style.display = 'block';
+            
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressPercent').textContent = '100%';
+            document.getElementById('progressStatus').textContent = 'Complete!';
+            document.getElementById('currentStatus').textContent = 'Complete';
+
+            // Show success message in video preview
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+            videoPlaceholder.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="margin-bottom: 0.5rem;">Generation Complete!</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Your content is ready to download
+                    </p>
+                    <div style="background: rgba(16, 185, 129, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="color: var(--success-color); font-size: 0.9rem;">
+                            ✓ HD Quality Output<br>
+                            ✓ Smooth Animations<br>
+                            ✓ Clear Audio<br>
+                            ✓ Cinema-Grade Finish
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            showStatus('🎉 Generation completed successfully!', 'success');
+        }
+
+        // Pause/Resume Generation
+        function pauseGeneration() {
+            if (!isGenerating) return;
+
+            isPaused = !isPaused;
+            const pauseBtn = document.getElementById('pauseBtn');
+
+            if (isPaused) {
+                pauseBtn.textContent = '▶️ Resume';
+                pauseBtn.style.background = 'linear-gradient(135deg, var(--success-color), #059669)';
+                document.getElementById('progressStatus').textContent = 'Paused';
+                document.getElementById('currentStatus').textContent = 'Paused';
+                showStatus('⏸️ Generation paused. Will resume automatically.', 'info');
+            } else {
+                pauseBtn.textContent = '⏸️ Pause';
+                pauseBtn.style.background = 'linear-gradient(135deg, var(--warning-color), #d97706)';
+                document.getElementById('progressStatus').textContent = 'Resuming...';
+                document.getElementById('currentStatus').textContent = 'Generating...';
+                showStatus('▶️ Generation resumed.', 'success');
+            }
+        }
+
+        // Download Result
+        function downloadResult() {
+            showStatus('⬇️ Preparing download... (Demo mode)', 'success');
+            
+            // Create a sample download
+            const quality = document.getElementById('qualitySelect').value;
+            const format = document.getElementById('formatSelect').value;
+            const duration = document.getElementById('durationSelect').value;
+            
+            const message = `Download ready!\n\nFormat: ${format.toUpperCase()}\nQuality: ${quality}\nDuration: ${duration} minutes\n\nIn production mode, this would download the actual generated file.`;
+            alert(message);
+        }
+
+        // Share Result
+        function shareResult() {
+            showStatus('📤 Share functionality (Demo mode)', 'success');
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out my AI-generated content!',
+                    text: 'Created with Script2Screen AI Platform',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                alert('Share feature activated! In production mode, this would open sharing options.');
+            }
+        }
+
+        // Scroll to Tools
+        function scrollToTools() {
+            document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Network Status Monitoring
+        window.addEventListener('online', () => {
+            showStatus('🌐 Network connection restored!', 'success');
+            if (isPaused && isGenerating) {
+                pauseGeneration(); // Resume
+            }
+        });
+
+        window.addEventListener('offline', () => {
+            showStatus('⚠️ Network connection lost. Generation paused.', 'error');
+            if (isGenerating && !isPaused) {
+                pauseGeneration(); // Auto-pause
+            }
+        });
+
+        // Initialize
+        updateGenerationDetails();
+        updateToolInfo();
+
+        // Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Service worker registration would go here in production
+                console.log('PWA ready for service worker registration');
+            });
+        }
+    </script>
+</body>
+</html>
